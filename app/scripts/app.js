@@ -4,10 +4,11 @@
  * @ngdoc overview
  * @name artApp
  * @description
- * # artApp
+ * # artApp is a small fictional app for artworks galleries
  *
  * Main module of the application.
  */
+
 angular
   .module('artApp', [
     'ngAnimate',
@@ -26,4 +27,7 @@ angular
       .otherwise({
         redirectTo: '/'
       });
+  })
+  .constant('config', {
+    apiRoot: 'http://54.77.217.175'
   });
