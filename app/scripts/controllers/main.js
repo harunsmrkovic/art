@@ -1,17 +1,8 @@
 'use strict';
 
-/**
- * @ngdoc function
- * @name artApp.controller:MainCtrl
- * @description
- * # MainCtrl
- * Controller of the artApp
- */
+// this is the main controller, all browse logic will reside here
+
 angular.module('artApp')
   .controller('MainCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+    
   });
