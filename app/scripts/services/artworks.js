@@ -31,7 +31,7 @@ angular.module('artApp')
 		};
 
 		// deletes an artwork
-		artwork.destroy = function(artworkId){
+		artworks.destroy = function(artworkId){
 
 		};
 
