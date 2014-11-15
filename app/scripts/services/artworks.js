@@ -75,6 +75,9 @@ angular.module('artApp')
 		// deletes an artwork
 		artworks.destroy = function(artworkId){
 
+			artworkId = $filter('idExtractor')(artworkId);
+			return $http.delete([artworkApi, artworkId].join('/'));
+
 		};
 
 		return artworks;

@@ -28,6 +28,9 @@ angular
         redirectTo: '/'
       });
   })
+  .config(function($httpProvider) {
+    $httpProvider.defaults.headers.delete = { 'Content-Type' : 'application/json' };
+  })
   .constant('config', {
     apiRoot: 'http://54.77.217.175'
   });
