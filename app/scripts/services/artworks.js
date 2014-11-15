@@ -33,7 +33,7 @@ angular.module('artApp')
 						function(artworksRaw){
 							// get what we want in the final array
 							angular.forEach(artworksRaw, function(artwork){
-								returnArtworks.push(artwork.data);
+								returnArtworks.push(artwork);
 							});
 							// keep up to the promise!
 							defer.resolve(returnArtworks);
@@ -59,8 +59,37 @@ angular.module('artApp')
 		// fetches a single artwork and everything related to it (e.g. material and medium info)
 		artworks.get = function(artworkId){
 
+			var defer = $q.defer();
+
 			artworkId = $filter('idExtractor')(artworkId);
-			return $http.get([artworks.api, artworkId].join('/'));
+			$http.get([artworks.api, artworkId].join('/'))
+			.success(function(artwork){
+				// when successfully fetched artwork, fetch all its dependencies now (medium and materials info)
+				// first fetch medium
+				Mediums.get(artwork.medium)
+				.success(function(medium){
+						artwork.mediumData = medium;
+						// after fetching medium, proceed to fetching all materials info
+						artworks.getMaterials(artwork.id).then(
+							function(materialsArr){
+
+								artwork.materialsData = materialsArr;
+								defer.resolve(artwork);
+							},
+							function(error){
+								defer.reject(error);
+							});
+				})
+				.error(function(error){
+					defer.reject(error);
+				});
+
+			})
+			.error(function(error){
+				defer.reject(error);
+			});
+
+			return defer.promise;
 
 		};
 
