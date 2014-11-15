@@ -7,7 +7,7 @@ angular.module('artApp')
 
 		var artworks = {};
 		var apiPath = config.apiRoot;
-		var artworkApi = apiPath + '/artworks';
+		artworks.api = apiPath + '/artworks';
 
 		// fetches all artworks and returns array of fully fetched artworks
 		artworks.getAll = function(){
@@ -15,7 +15,7 @@ angular.module('artApp')
 			var defer = $q.defer();
 
 			// get references to all the artworks
-			$http.get(artworkApi)
+			$http.get(artworks.api)
 			.success(function(data){
 				var artworksUrls = data.urls,
 						returnArtworks = [],
@@ -43,6 +43,9 @@ angular.module('artApp')
 							defer.reject(error);
 						});
 				}
+				else {
+					defer.resolve(returnArtworks);
+				}
 			})
 			.error(function(error){
 				// promise not kept :((((
@@ -57,7 +60,7 @@ angular.module('artApp')
 		artworks.get = function(artworkId){
 
 			artworkId = $filter('idExtractor')(artworkId);
-			return $http.get([artworkApi, artworkId].join('/'));
+			return $http.get([artworks.api, artworkId].join('/'));
 
 		};
 
@@ -76,8 +79,30 @@ angular.module('artApp')
 		artworks.destroy = function(artworkId){
 
 			artworkId = $filter('idExtractor')(artworkId);
-			return $http.delete([artworkApi, artworkId].join('/'));
+			return $http.delete([artworks.api, artworkId].join('/'));
 
+		};
+
+		// fetch all materials for one artwork
+		artworks.getMaterials = function(artworkId){
+			var defer = $q.defer();
+			artworkId = $filter('idExtractor')(artworkId);
+
+			// fetch all materials for this artwork, and then info about each of the materials!
+			$http.get([artworks.api, artworkId, 'materials'].join('/'))
+			.success(function(materialsUrls){
+				// after we have list of all materials, fetch their info
+				Materials.getList(materialsUrls.urls).then(
+					function(fetchedMaterials){
+						defer.resolve(fetchedMaterials);
+					},
+					function(error){
+						defer.reject(error);
+					}
+				);
+			});
+
+			return defer.promise;
 		};
 
 		return artworks;

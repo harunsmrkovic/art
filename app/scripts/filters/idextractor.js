@@ -11,7 +11,7 @@
 angular.module('artApp')
 	.filter('idExtractor', function () {
 		return function (input) {
-			var splitter = input.split('/');
+			var splitter = input.toString().split('/');
 			if(splitter.length > 0){
 				return splitter[splitter.length - 1];
 			}
