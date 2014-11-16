@@ -94,13 +94,13 @@ angular.module('artApp')
 
 		// creates a new artwork from an already assembled object
 		artworks.create = function(artworkData){
-
+			
 		};
 
 		// updates an existing artwork with new set of data 
 		// (important: because of specific API PUT implementation, whole artwork object must be pased on every update, not partial)
 		artworks.update = function(artworkId, artworkData){
-
+			
 		};
 
 		// deletes an artwork

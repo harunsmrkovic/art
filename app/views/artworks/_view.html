@@ -1,0 +1,44 @@
+<div class="col-md-2 col-sm-2">
+	<h5>{{artwork.title}}</h5>
+	<h6>{{artwork.artist}}</h6>
+</div>
+<div class="col-md-1 col-sm-1">
+	<span class="year">{{artwork.year}}</span>
+</div>
+<div class="col-md-2 col-sm-2" ng-switch="artwork.mediumData.name">
+	<span class="label medium label-primary" ng-switch-when="Painting"><i class="fa fa-paint-brush"></i> Painting</span>
+	<span class="label medium label-primary" ng-switch-when="Sculpture"><i class="fa fa-shield"></i> Sculpture</span>
+	<span class="label medium label-primary" ng-switch-default><i class="fa fa-square"></i> {{artwork.mediumData.name}}</span>
+</div>
+<div class="col-md-2 col-sm-2">
+	<div class="materials" ng-if="artwork.materialsData.length">
+		<span class="label label-success material" ng-repeat="material in artwork.materialsData">{{material.name}}</span>
+	</div>
+</div>
+<div class="col-md-2 col-sm-2 dimensions">
+	<div ng-if="artwork.dimension1 && artwork.dimension2">
+		<i class="fa pull-left" ng-class="{'fa-cube': artwork.mediumData.dimensions == 3, 'fa-square': artwork.mediumData.dimensions == 2}"></i>
+		<div class="wrapDims pull-left">
+			<span class="dimension">{{artwork.dimension1}}</span>
+			x
+			<span class="dimension">{{artwork.dimension2}}</span>
+			<span ng-if="artwork.mediumData.dimensions == 3">x</span>
+			<span class="dimension" ng-if="artwork.mediumData.dimensions == 3">{{artwork.dimension3}}</span>
+			<span class="measure" ng-if="artwork.dimensions_in_cm">cm</span>
+			<span class="measure" ng-if="!artwork.dimensions_in_cm">inch</span>
+		</div>
+	</div>
+</div>
+<div class="col-md-2 col-sm-2">
+	<div ng-if="artwork.price">
+		<span class="price">{{artwork.price}} €</span>
+		<span class="label label-info" ng-if="artwork.includes_vat">Net</span>
+		<span class="label label-primary" ng-if="!artwork.includes_vat">Gross</span>
+		<br>
+		<span ng-if="artwork.vat" class="label label-warning">VAT: {{artwork.vat}}%</span>
+	</div>
+</div>
+<div class="col-md-1 col-sm-1">
+	<a class="btn btn-xs btn-danger deleteArtwork" ng-click="destroyArtwork(artwork)"><i class="fa fa-trash"></i></a>
+	<a class="btn btn-xs btn-warning editArtwork"><i class="fa fa-pencil"></i></a>
+</div>

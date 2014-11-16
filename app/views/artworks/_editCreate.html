@@ -1,0 +1,61 @@
+<div class="col-md-2 col-sm-2">
+	<label for="title">Title</label>
+	<input type="text" ng-model="artwork.title" id="title" class="form-control" placeholder="Enter title...">
+	<br>
+	<label for="artist">Artist</label>
+	<input type="text" ng-model="artwork.artist" id="artist" class="form-control" placeholder="Enter artist's name...">
+</div>
+<div class="col-md-1 col-sm-1">
+	<label for="year">Year</label>
+	<input type="text" ng-model="artwork.year" id="year" class="form-control">
+</div>
+<div class="col-md-2 col-sm-2" ng-switch="artwork.mediumData.name">
+	<label for="medium">Medium</label>
+	<select ng-model="artwork.mediumData" name="medium" id="medium" class="form-control" ng-options="medium as medium.name for medium in mediums"></select>
+</div>
+<div class="col-md-2 col-sm-2">
+	<label for="addMaterial">Add new material</label>
+	<input type="text" ng-model="addMaterialName" class="form-control" name="addMaterial" id="addMaterial">
+	<br>
+	<div class="materials" ng-if="artwork.materialsData.length">
+		<span class="label label-success material" ng-repeat="material in artwork.materialsData">{{material.name}} <i class="fa fa-close"></i></span>
+	</div>
+</div>
+<div class="col-md-2 col-sm-2 dimensions">
+	<div>
+		<i class="fa pull-left" ng-class="{'fa-cube': artwork.mediumData.dimensions == 3, 'fa-square': artwork.mediumData.dimensions == 2}"></i>
+		<div class="wrapDims pull-left">
+			<input type="text" class="contenteditable" ng-model="artwork.dimension1">
+			<span class="pull-left x">x</span>
+			<input type="text" class="contenteditable" ng-model="artwork.dimension2">
+			<span class="pull-left x" ng-if="artwork.mediumData.dimensions == 3">x</span>
+			<input type="text" class="contenteditable" ng-if="artwork.mediumData.dimensions == 3" ng-model="artwork.dimension3">
+			<br>
+			<br>
+			<a class="label measure" data-measure="cm" ng-class="{'label-info': artwork.dimensions_in_cm, 'label-default': !artwork.dimensions_in_cm}">cm</a>
+			<a class="label measure" data-measure="inch" ng-class="{'label-info': !artwork.dimensions_in_cm, 'label-default': artwork.dimensions_in_cm}">inch</a>
+		</div>
+	</div>
+</div>
+<div class="col-md-2 col-sm-2">
+	<div ng-if="artwork.price">
+		<label for="price">Price</label>
+		<div class="input-group">
+			<input type="text" ng-model="artwork.price" id="price" class="form-control">
+			<span class="input-group-addon">€</span>
+		</div>
+		<a class="label netgross" data-netgross="net" ng-class="{'label-info': artwork.includes_vat, 'label-default': !artwork.includes_vat}">Net</a>
+		<a class="label netgross" data-netgross="gross" ng-class="{'label-info': !artwork.includes_vat, 'label-default': artwork.includes_vat}">Gross</a>
+		<br><br>
+		<label for="vat">VAT</label>
+		<div class="input-group">
+			<input type="text" ng-model="artwork.vat" id="vat" class="form-control">
+			<span class="input-group-addon">%</span>
+		</div>
+		
+	</div>
+</div>
+<div class="col-md-1 col-sm-1">
+	<a class="btn btn-xs btn-danger stopEdit"><i class="fa fa-close"></i></a>
+	<a class="btn btn-xs btn-success saveArtwork"><i class="fa fa-check"></i></a>
+</div>

@@ -24,6 +24,12 @@ body {
 	margin-top: 30px;
 }
 
+.btn.pushIcon {
+	i {
+		margin-right: 5px;
+	}
+}
+
 #artworks {
 
 	#header {
@@ -66,6 +72,7 @@ body {
 
 		.dimensions {
 			color: #e6e9ed;
+			padding-top: 10px;
 			i {
 				font-size: 30px;
 				color: #aab2bd;
@@ -79,6 +86,23 @@ body {
 			.dimension {
 				font-size: 16px;
 				color: #ccd1d9;
+			}
+
+			span.x {
+				margin: 3px;
+			}
+
+			.contenteditable {
+				width: 30px;
+				border: none;
+				border-bottom: #e6e9ed dashed 2px;
+				font-size: 16px;
+				color: #ccd1d9;
+				float: left;
+				&:focus {
+					outline: none;
+					border-bottom-color: #ccd1d9;
+				}
 			}
 		}
 
