@@ -20,8 +20,16 @@ angular.module('artApp')
 			});
 		});
 
+		// we have to watch for changes and apply them to API-friendly property
+		$scope.$watch('artwork.mediumData', function(){
+			$scope.artwork.medium = $scope.artwork.mediumData.url;
+		});
+
 		$scope.updateArtwork = function(artwork){
-			Artworks.update(artwork);
+			Artworks.update(artwork)
+			.success(function(){
+				$scope.artwork.inEdit = false;
+			});
 		};
 
   });
