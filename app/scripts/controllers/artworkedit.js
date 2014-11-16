@@ -3,7 +3,7 @@
 // general controls regarding artworks
 
 angular.module('artApp')
-  .controller('ArtworkEditCtrl', function ($scope, Mediums, Materials) {
+  .controller('ArtworkEditCtrl', function ($scope, Artworks, Mediums, Materials) {
 
     // populate scope with all mediums available
 		Mediums.getAll().then(function(mediums){
@@ -19,5 +19,9 @@ angular.module('artApp')
 				i++;
 			});
 		});
+
+		$scope.updateArtwork = function(artwork){
+			Artworks.update(artwork);
+		};
 
   });

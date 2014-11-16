@@ -16,13 +16,18 @@ angular.module('artApp')
 					});
 				}
 
+				scope.artworkAtLink = angular.copy(scope.artwork);
+
 				// canceling edit
 				element.on('click', '.stopEdit', function(){
+					scope.artwork = scope.artworkAtLink;
 					exitEditMode();
 				});
 
 				// initing save
 				element.on('click', '.saveArtwork', function(){
+					console.log(scope.artwork);
+					scope.updateArtwork(scope.artwork);
 					exitEditMode();
 				});
 

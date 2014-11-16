@@ -16,8 +16,8 @@
 	
 	<!-- artworks render below -->
 	<div class="row artwork" ng-repeat="artwork in artworks | filter:{artist:searchArtists}">
-		<div artwork-view ng-show="artwork.inEdit"></div>
-		<div artwork-edit ng-hide="artwork.inEdit"></div>
+		<div artwork-view ng-hide="artwork.inEdit"></div>
+		<div artwork-edit ng-show="artwork.inEdit"></div>
 	</div>
 
 	<!-- no results -->
