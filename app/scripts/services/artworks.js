@@ -72,7 +72,6 @@ angular.module('artApp')
 						// after fetching medium, proceed to fetching all materials info
 						artworks.getMaterials(artwork.id).then(
 							function(materialsArr){
-
 								artwork.materialsData = materialsArr;
 								defer.resolve(artwork);
 							},

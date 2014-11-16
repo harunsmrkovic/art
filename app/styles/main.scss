@@ -4,19 +4,103 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
 // endbower
 
 .browsehappy {
-  margin: 0.2em 0;
-  background: #ccc;
-  color: #000;
-  padding: 0.2em 0;
+	margin: 0.2em 0;
+	background: #ccc;
+	color: #000;
+	padding: 0.2em 0;
 }
 
 /* Space out content a bit */
 body {
-  padding-top: 20px;
-  padding-bottom: 20px;
+	padding-top: 20px;
+	padding-bottom: 20px;
 }
 
 /* Custom page header */
-.header {
-  border-bottom: 1px solid #e5e5e5;
+#mainHeader {
+	border-bottom: 1px solid #e5e5e5;
+	padding-bottom: 10px;
+	margin-bottom: 50px;
+	margin-top: 30px;
+}
+
+#artworks {
+
+	#header {
+		font-weight: bold;
+		border-bottom: 1px solid #e5e5e5;
+		padding-bottom: 5px;
+	}
+
+	.artwork {
+		
+		border-bottom: 1px dashed #e5e5e5;
+		padding-top: 5px;
+		padding-bottom: 5px;
+		
+		h5, h6 {
+			margin: 5px 0;
+		}
+
+		.year {
+			color: #ccd1d9;
+			font-weight: lighter;
+			font-size: 20px;
+			margin-top: -15px;
+		}
+
+		.medium {
+			display: inline-block;
+		}
+
+		.materials {
+			.material {
+				margin-right: 5px;
+				display: inline-block;
+			}
+			h6 {
+				margin-bottom: 0;
+			}
+			margin-bottom: 10px;
+		}
+
+		.dimensions {
+			color: #e6e9ed;
+			i {
+				font-size: 30px;
+				color: #aab2bd;
+				width: 30px;
+			}
+
+			.wrapDims {
+				margin-top: 3px;
+			}
+
+			.dimension {
+				font-size: 16px;
+				color: #ccd1d9;
+			}
+		}
+
+	}
+
+}
+
+.loadingArtworks {
+	width: 80px;
+	margin: 100px auto;
+	font-size: 80px;
+}
+
+.footer {
+	margin-top: 20px;
+	margin-bottom: 50px;
+}
+
+a {
+	cursor: pointer;
+}
+
+.clb {
+	clear: both;
 }

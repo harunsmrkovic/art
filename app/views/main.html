@@ -1,1 +1,63 @@
-<pre ng-repeat="artwork in artworks">{{artwork}}</pre>
+<div class="row" id="mainHeader">
+	<div class="col-md-9 col-xs-9"><input type="text" class="form-control" ng-model="searchArtists" placeholder="Search for artists..."></div>
+	<div class="col-md-3 col-xs-3"><a href="" class="pull-right btn btn-primary">Create artwork</a></div>
+</div>
+
+<div id="artworks" ng-if="artworks.length">
+	<div class="row" id="header">
+		<div class="col-md-3 col-sm-3">Artist / Title</div>
+		<div class="col-md-1 col-sm-1">Medium</div>
+		<div class="col-md-2 col-sm-2">Materials</div>
+		<div class="col-md-3 col-sm-3">Dimensions</div>
+		<div class="col-md-2 col-sm-2">Price</div>
+		<div class="col-md-1 col-sm-1"></div>
+	</div>
+	<!-- artworks render below -->
+	<div class="row artwork" ng-repeat="artwork in artworks | filter:{artist:searchArtists}">
+		<div class="col-md-3 col-sm-3">
+			<h5 class="pull-left">{{artwork.title}}</h5>
+			<br class="clb">
+			<h6 class="pull-left">{{artwork.artist}}</h6>
+			<span class="year pull-right">{{artwork.year}}</span>
+		</div>
+		<div class="col-md-1 col-sm-1" ng-switch="artwork.mediumData.name">
+			<span class="label medium label-primary" ng-switch-when="Painting"><i class="fa fa-paint-brush"></i> Painting</span>
+			<span class="label medium label-primary" ng-switch-when="Sculpture"><i class="fa fa-shield"></i> Sculpture</span>
+			<span class="label medium label-primary" ng-switch-default><i class="fa fa-square"></i> {{artwork.mediumData.name}}</span>
+		</div>
+		<div class="col-md-2 col-sm-2">
+			<div class="materials" ng-if="artwork.materialsData.length">
+				<span class="label label-success material" ng-repeat="material in artwork.materialsData">{{material.name}}</span>
+			</div>
+		</div>
+		<div class="col-md-3 col-sm-3 dimensions">
+			<i class="fa pull-left" ng-class="{'fa-cube': artwork.mediumData.dimensions == 3, 'fa-square': artwork.mediumData.dimensions == 2}"></i>
+			<div class="wrapDims pull-left">
+				<span class="dimension">{{artwork.dimension1}}</span>
+				x
+				<span class="dimension">{{artwork.dimension2}}</span>
+				<span ng-if="artwork.mediumData.dimensions == 3">x</span>
+				<span class="dimension" ng-if="artwork.mediumData.dimensions == 3">{{artwork.dimension3}}</span>
+				<span class="measure" ng-if="artwork.dimensions_in_cm">cm</span>
+				<span class="measure" ng-if="!artwork.dimensions_in_cm">inch</span>
+			</div>
+		</div>
+		<div class="col-md-2 col-sm-2">
+			{{artwork.price}}
+		</div>
+		<div class="col-md-1 col-sm-1">
+			<a class="btn btn-xs btn-danger"><i class="fa fa-trash"></i></a>
+			<a class="btn btn-xs btn-warning"><i class="fa fa-pencil"></i></a>
+		</div>
+	</div>
+	<!-- no results -->
+	<div class="alert alert-danger" ng-if="!(artworks | filter:{artist:searchArtists}).length">There are no artworks with artist "{{searchArtists}}"</div>
+</div>
+
+<!-- no artworks -->
+<div class="alert alert-warning" ng-if="!artworks.length && !loadingArtworks">There are no artworks. Add some from the header...</div>
+
+<!-- loading artworks -->
+<div class="loadingArtworks" ng-if="loadingArtworks">
+	<i class="fa fa-circle-o-notch fa-spin"></i>
+</div>

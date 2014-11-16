@@ -5,8 +5,10 @@
 angular.module('artApp')
 	.controller('MainCtrl', function ($scope, Artworks, Mediums, Materials, $log) {
 		
+		$scope.loadingArtworks = true;
 		Artworks.getAll().then(function(artworks){
 			$scope.artworks = artworks;
+			$scope.loadingArtworks = false;
 		},
 		function(errors){
 			$log.warn(errors);
