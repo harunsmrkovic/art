@@ -130,6 +130,24 @@ angular.module('artApp')
 				);
 			});
 
+			// attach a material to the artwork
+			artworks.attachMaterial = function(artworkId, materialData){
+
+				return $http.post([artworks.api, artworkId, 'materials'].join('/'), materialData);
+
+			};
+
+			// detach a material from the artwork
+			artworks.detachMaterial = function(artworkId, materialData){
+
+				return $http({
+					url: [artworks.api, artworkId, 'materials'].join('/'),
+					method: 'DELETE',
+					data: materialData
+				});
+
+			};
+
 			return defer.promise;
 		};
 

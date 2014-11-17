@@ -10,25 +10,21 @@ angular.module('artApp')
 			controller: 'ArtworkEditCtrl',
 			link: function postLink(scope, element, attrs) {
 
-				function exitEditMode(){
-					scope.$apply(function(){
-						scope.artwork.inEdit = false;
-					});
-				}
-
 				scope.artworkAtLink = angular.copy(scope.artwork);
 
 				// canceling edit
 				element.on('click', '.stopEdit', function(){
 					scope.artwork = scope.artworkAtLink;
-					exitEditMode();
+					scope.$apply(function(){
+						scope.artwork.inEdit = false;
+					});
 				});
 
-				// initing save
-				element.on('click', '.saveArtwork', function(){
-					console.log(scope.artwork);
-					scope.updateArtwork(scope.artwork);
-					exitEditMode();
+				// adding material
+				element.on('keyup', '#addMaterial', function(e){
+					if(e.keyCode === 13){
+						scope.addMaterialAndAttach();
+					}
 				});
 
 				// changing measure between CM and INCH

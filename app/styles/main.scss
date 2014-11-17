@@ -68,6 +68,11 @@ body {
 				margin-bottom: 0;
 			}
 			margin-bottom: 10px;
+			a {
+				i {
+					color: #fff;
+				}
+			}
 		}
 
 		.dimensions {
@@ -119,6 +124,8 @@ body {
 .footer {
 	margin-top: 20px;
 	margin-bottom: 50px;
+	color: #e6e9ed;
+	font-size: 10px;
 }
 
 a {

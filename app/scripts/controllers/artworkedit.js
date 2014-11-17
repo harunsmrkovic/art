@@ -3,7 +3,7 @@
 // general controls regarding artworks
 
 angular.module('artApp')
-  .controller('ArtworkEditCtrl', function ($scope, Artworks, Mediums, Materials) {
+  .controller('ArtworkEditCtrl', function ($scope, $log, Artworks, Mediums, Materials) {
 
     // populate scope with all mediums available
 		Mediums.getAll().then(function(mediums){
@@ -25,10 +25,34 @@ angular.module('artApp')
 			$scope.artwork.medium = $scope.artwork.mediumData.url;
 		});
 
-		$scope.updateArtwork = function(artwork){
-			Artworks.update(artwork)
+		// fire an update request
+		$scope.updateArtwork = function(){
+			Artworks.update($scope.artwork)
 			.success(function(){
 				$scope.artwork.inEdit = false;
+			})
+			.error(function(error){
+				$log.error(error);
+			});
+		};
+
+		$scope.addMaterialAndAttach = function(){
+			var materialData = {name: $scope.addMaterialName};
+			Materials.create(materialData)
+			.then(
+				function(createdMaterial){
+					Artworks.attachMaterial($scope.artwork.id, createdMaterial)
+					.success(function(){
+						$scope.addMaterialName = '';
+						$scope.artwork.materialsData.push(createdMaterial);
+					});
+				});
+		};
+
+		$scope.detachMaterial = function(material){
+			Artworks.detachMaterial($scope.artwork.id, {url: material.url})
+			.success(function(){
+				$scope.artwork.materialsData.splice($scope.artwork.materialsData.indexOf(material), 1);
 			});
 		};
 

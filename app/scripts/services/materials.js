@@ -73,7 +73,22 @@ angular.module('artApp')
 
 		// create a new material
 		materials.create = function(materialData){
+			var defer = $q.defer();
 
+			$http.post(materials.api, materialData)
+			.success(function(data, status, headers){
+				if(status === 201){
+					defer.resolve({name: materialData.name, url: headers('Location'), id: $filter('idExtractor')(headers('Location'))});
+				}
+				else {
+					defer.reject('Unknown Status code');
+				}
+			})
+			.error(function(error){
+				defer.reject(error);
+			});
+
+			return defer.promise;
 		};
 
 		return materials;
