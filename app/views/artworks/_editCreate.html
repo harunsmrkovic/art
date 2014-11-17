@@ -28,25 +28,23 @@
 			<input type="text" class="contenteditable" ng-model="artwork.dimension1">
 			<span class="pull-left x">x</span>
 			<input type="text" class="contenteditable" ng-model="artwork.dimension2">
-			<span class="pull-left x" ng-if="artwork.mediumData.dimensions == 3">x</span>
-			<input type="text" class="contenteditable" ng-if="artwork.mediumData.dimensions == 3" ng-model="artwork.dimension3">
+			<span class="pull-left x" ng-show="artwork.mediumData.dimensions == 3">x</span>
+			<input type="text" class="contenteditable" ng-show="artwork.mediumData.dimensions == 3" ng-model="artwork.dimension3">
 			<br>
 			<br>
-			<a class="label measure" data-measure="cm" ng-class="{'label-info': artwork.dimensions_in_cm, 'label-default': !artwork.dimensions_in_cm}">cm</a>
-			<a class="label measure" data-measure="inch" ng-class="{'label-info': !artwork.dimensions_in_cm, 'label-default': artwork.dimensions_in_cm}">inch</a>
+			<div measures></div>
 		</div>
 	</div>
 </div>
 <div class="col-md-2 col-sm-2">
-	<div ng-if="artwork.price">
+	<div>
 		<label for="price">Price</label>
 		<div class="input-group">
 			<input type="text" ng-model="artwork.price" id="price" class="form-control">
 			<span class="input-group-addon">€</span>
 		</div>
-		<a class="label netgross" data-netgross="net" ng-class="{'label-info': artwork.includes_vat, 'label-default': !artwork.includes_vat}">Net</a>
-		<a class="label netgross" data-netgross="gross" ng-class="{'label-info': !artwork.includes_vat, 'label-default': artwork.includes_vat}">Gross</a>
-		<br><br>
+		<div net-gross></div>
+		<br>
 		<label for="vat">VAT</label>
 		<div class="input-group">
 			<input type="text" ng-model="artwork.vat" id="vat" class="form-control">
@@ -57,5 +55,9 @@
 </div>
 <div class="col-md-1 col-sm-1">
 	<a class="btn btn-xs btn-danger stopEdit"><i class="fa fa-close"></i></a>
-	<a class="btn btn-xs btn-success" ng-click="updateArtwork()"><i class="fa fa-check"></i></a>
+	<a class="btn btn-xs btn-success" ng-click="updateOrCreateArtwork()"><i class="fa fa-check"></i></a>
+</div>
+<div class="col-md-12 col-sm-12">
+	<label for="description">Description</label>
+	<textarea name="description" ng-model="artwork.description" id="" class="form-control"></textarea>
 </div>

@@ -1,6 +1,6 @@
 <div class="row" id="mainHeader">
 	<div class="col-md-9 col-xs-9"><input type="text" class="form-control" ng-model="searchArtists" placeholder="Search for artists..."></div>
-	<div class="col-md-3 col-xs-3"><a href="" class="pull-right btn btn-primary pushIcon"><i class="fa fa-plus-square"></i> Create artwork</a></div>
+	<div class="col-md-3 col-xs-3"><a ng-click="newArtwork.show = true" class="pull-right btn btn-primary pushIcon"><i class="fa fa-plus-square"></i> Create artwork</a></div>
 </div>
 
 <div id="artworks" ng-if="artworks.length">
@@ -13,10 +13,17 @@
 		<div class="col-md-2 col-sm-2">Price</div>
 		<div class="col-md-1 col-sm-1"></div>
 	</div>
-	
+
+	<!-- new artwork -->
+	<div class="row artwork">
+		<div artwork-create ng-show="newArtwork.show"></div>
+	</div>
+
 	<!-- artworks render below -->
 	<div class="row artwork" ng-repeat="artwork in artworks | filter:{artist:searchArtists}">
+		<!-- new artwork -->
 		<div artwork-view ng-hide="artwork.inEdit"></div>
+		<!-- edit artwork -->
 		<div artwork-edit ng-show="artwork.inEdit"></div>
 	</div>
 

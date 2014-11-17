@@ -57,7 +57,7 @@ angular.module('artApp')
 		mediums.get = function(mediumId){
 
 			mediumId = $filter('idExtractor')(mediumId);
-			return $http.get([mediums.api, mediumId].join('/'));
+			return $http.get([mediums.api, mediumId].join('/'), {cache: true});
 
 		};
 

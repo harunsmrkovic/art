@@ -67,7 +67,7 @@ angular.module('artApp')
 		materials.get = function(materialId){
 
 			materialId = $filter('idExtractor')(materialId);
-			return $http.get([materials.api, materialId].join('/'));
+			return $http.get([materials.api, materialId].join('/'), {cache: true});
 
 		};
 

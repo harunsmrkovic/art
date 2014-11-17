@@ -41,11 +41,33 @@ body {
 	.artwork {
 		
 		border-bottom: 1px dashed #e5e5e5;
-		padding-top: 5px;
-		padding-bottom: 5px;
+		padding-top: 10px;
+		padding-bottom: 10px;
+		position: relative;
 		
 		h5, h6 {
 			margin: 5px 0;
+		}
+
+		.showMore {
+			display: none;
+			position: absolute;
+			font-size: 20px;
+			bottom: -12px;
+			left: 50%;
+			margin-left: -8px;
+			color: #777777;
+		}
+
+		&:hover {
+			.showMore {
+				display: block;
+			}
+		}
+
+		.price {
+			font-size: 14px;
+			font-weight: bold;
 		}
 
 		.year {
@@ -125,7 +147,7 @@ body {
 	margin-top: 20px;
 	margin-bottom: 50px;
 	color: #e6e9ed;
-	font-size: 10px;
+	font-size: 12px;
 }
 
 a {

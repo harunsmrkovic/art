@@ -29,4 +29,9 @@ angular.module('artApp')
 
 		};
 
+		// toggling show more
+		$scope.toggleShowMore = function(){
+			console.log($scope.artwork);
+		};
+
 	});

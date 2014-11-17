@@ -42,3 +42,10 @@
 	<a class="btn btn-xs btn-danger deleteArtwork" ng-click="destroyArtwork(artwork)"><i class="fa fa-trash"></i></a>
 	<a class="btn btn-xs btn-warning editArtwork"><i class="fa fa-pencil"></i></a>
 </div>
+
+<a title="Show more" class="showMore"><i class="fa" ng-class="{'fa-chevron-circle-down': !artwork.showMore, 'fa-chevron-circle-up': artwork.showMore}"></i></a>
+
+<div class="col-md-12 col-sm-12" ng-show="artwork.showMore">
+	<br>
+	<div class="panel panel-default"><div class="panel-body">{{artwork.description}}</div></div>
+</div>

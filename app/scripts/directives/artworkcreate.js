@@ -1,22 +1,25 @@
 'use strict';
 
-// directive for handling editing artworks
-
+/**
+ * @ngdoc directive
+ * @name artApp.directive:artworkCreate
+ * @description
+ * # artworkCreate
+ */
 angular.module('artApp')
-	.directive('artworkEdit', function () {
+	.directive('artworkCreate', function () {
 		return {
 			templateUrl: 'views/artworks/_editCreate.html',
 			restrict: 'A',
-			controller: 'ArtworkEditCtrl',
+			controller: 'ArtworkCreateCtrl',
+			scope: true,
 			link: function postLink(scope, element, attrs) {
-
-				scope.artworkAtLink = angular.copy(scope.artwork);
 
 				// canceling edit
 				element.on('click', '.stopEdit', function(){
-					scope.artwork = scope.artworkAtLink;
+					scope.artwork = angular.copy(scope.artwork_default);
 					scope.$apply(function(){
-						scope.artwork.inEdit = false;
+						scope.newArtwork.show = false;
 					});
 				});
 

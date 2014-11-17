@@ -15,6 +15,12 @@ angular.module('artApp')
 					});
 				});
 
+				element.on('click', '.showMore', function(){
+					scope.$apply(function(){
+						scope.artwork.showMore = (scope.artwork.showMore) ? false : true;
+					});
+				});
+
 			}
 		};
 	});

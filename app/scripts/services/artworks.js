@@ -94,13 +94,29 @@ angular.module('artApp')
 
 		// creates a new artwork from an already assembled object
 		artworks.create = function(artworkData){
+			var defer = $q.defer();
+			console.log(artworkData);
+			$http.post(artworks.api, artworkData)
+			.success(function(data, status, headers){
+				if(status === 201){
+					var retData = artworkData;
+					retData.id = $filter('idExtractor')(headers('Location'));
+					defer.resolve(retData);
+				}
+			})
+			.error(function(error){
+				defer.reject(error);
+			});
 
+			return defer.promise;
 		};
 
 		// updates an existing artwork with new set of data 
 		// (important: because of specific API PUT implementation, whole artwork object must be pased on every update, not partial)
 		artworks.update = function(artworkData){
+
 			return $http.put([artworks.api, artworkData.id].join('/'), artworkData);
+
 		};
 
 		// deletes an artwork

@@ -26,7 +26,7 @@ angular.module('artApp')
 		});
 
 		// fire an update request
-		$scope.updateArtwork = function(){
+		$scope.updateOrCreateArtwork = function(){
 			Artworks.update($scope.artwork)
 			.success(function(){
 				$scope.artwork.inEdit = false;
